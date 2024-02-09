@@ -1,0 +1,28 @@
+/* Write CSS here */
+.main-bg {
+  background-image: url('https://assets.ccbp.in/frontend/react-js/stopwatch-lg-bg.png');
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 400px;
+}
+
+.clock-container {
+  display: flex;
+  text-align: center;
+}
+
+.clockicon {
+  padding-right: 10px;
+  height: 40px;
+  width: 50px;
+}
+
+.button-container {
+  display: flex;
+}
+
+.button {
+  margin: 5px;
+}
