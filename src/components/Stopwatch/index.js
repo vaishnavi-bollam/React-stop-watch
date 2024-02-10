@@ -3,59 +3,61 @@ import {Component} from 'react'
 import './index.css'
 
 class Stopwatch extends Component {
-  state = {initialValue: '00:00', secvalue: 1, minvalue: 0}
+  state = {timeLeft: 0}
 
   onStartClicked = () => {
-    const {secvalue, initialValue, minvalue} = this.state
-    if (secvalue < 10) {
+    this.timerUniqueId = setInterval(() => {
       this.setState(prevState => ({
-        secvalue: prevState.secvalue + 1,
-        initialValue: `0${minvalue}:0${secvalue}`,
+        timeLeft: prevState.timeLeft + 1,
       }))
-    } else if (secvalue >= 10 && secvalue < 60) {
-      this.setState(prevState => ({
-        secvalue: prevState.secvalue + 1,
-        initialValue: `0${minvalue}:${secvalue}`,
-      }))
-    }
+    }, 1000)
+  }
 
-    if (secvalue === 59 && minvalue < 10) {
-      this.setState(prevState => ({
-        minvalue: prevState.minvalue + 1,
-        initialValue: `0${minvalue}:00`,
-        secvalue: 1,
-      }))
-    } else if (minvalue >= 10) {
-      this.setState(prevState => ({
-        minvalue: prevState.minvalue + 1,
-        initialValue: `${minvalue}:00`,
-        secvalue: 1,
-      }))
-    }
+  onStopClicked = () => {
+    clearInterval(this.timerUniqueId)
+  }
+
+  onResetClicked = () => {
+    const {timeLeft} = this.state
+    this.setState({
+      timeLeft: 0,
+    })
+    clearInterval(this.timerUniqueId)
   }
 
   render() {
-    const {secvalue, initialValue} = this.state
+    const {timeLeft} = this.state
+    const minutes = Math.floor(timeLeft / 60)
+    const seconds = timeLeft % 60
+    console.log(minutes)
+
     return (
       <div className="main-bg">
-        <h1>StopWatch</h1>
+        <h1>Stopwatch</h1>
 
         <div className="clock-container">
           <img
             src="https://assets.ccbp.in/frontend/react-js/stopwatch-timer.png "
             className="clockicon"
-            alt="stop watch"
+            alt="stopwatch"
           />
           <p>Timer</p>
         </div>
 
-        <h1>{initialValue}</h1>
+        <h1>
+          {minutes < 10 ? `0${minutes}` : minutes}:
+          {seconds < 10 ? `0${seconds}` : seconds}
+        </h1>
         <div className="button-container">
-          <button className="button" onClick={this.onStartClicked}>
+          <button className="button startbtn" onClick={this.onStartClicked}>
             Start
           </button>
-          <button className="button">Stop</button>
-          <button className="button">Reset</button>
+          <button className="button stopbtn" onClick={this.onStopClicked}>
+            Stop
+          </button>
+          <button className="button resetbtn" onClick={this.onResetClicked}>
+            Reset
+          </button>
         </div>
       </div>
     )

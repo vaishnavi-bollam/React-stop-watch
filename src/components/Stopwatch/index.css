@@ -26,3 +26,24 @@
 .button {
   margin: 5px;
 }
+
+.startbtn {
+  background-color: #1db05f;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.stopbtn {
+  background-color: #ef0d36;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.resetbtn {
+  background-color: #eaa800;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+}
